@@ -1,0 +1,119 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="container" style="margin-top: 40px; margin-bottom: 60px;">
+    <!--заголовок страницы -->
+    <div class="text-center" style="margin-bottom: 40px;">
+        <h2 style="border: none; padding: 0; text-transform: uppercase; letter-spacing: 3px; font-size: 30px; font-weight: 800; color: #1a1a1a;">{{ title }}</h2>
+        <p class="lead" style="color: #777; font-size: 14px; letter-spacing: 1px; margin-top: 10px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+            Поделитесь вашим мнением о качестве одежды и сервисе FashionShop. Мы ценим каждый отзыв.
+        </p>
+        <div style="width: 60px; height: 2px; background: #d4af37; margin: 15px auto 0;"></div>
+    </div>
+
+    {% if form != None %}
+    <div class="row">
+        <!-- Центрируем форму на экране с помощью колонок Bootstrap -->
+        <div class="col-md-6 col-md-offset-3">
+            <div style="background: #ffffff; border: 1px solid #eaeaea; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); border-radius: 4px;">
+
+                <form action="" method="post" class="form-horizontal">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                    <div class="form-group" style="margin-bottom: 25px; padding: 0 15px;">
+                        <label style="font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; color: #222; margin-bottom: 8px; display: block;">
+                            {{ field.label }}
+                        </label>
+
+                        <!-- Особый стиль для радиокнопок оценки и чекбоксов -->
+                        {% if field.name == 'score' %}
+                        <div class="custom-radio-group" style="display: flex; flex-direction: column; gap: 8px; background: #fafafa; padding: 15px; border-radius: 4px; border: 1px solid #eee;">
+                            {{ field }}
+                        </div>
+                        {% elif field.name == 'subscribe' %}
+                        <div style="background: #fafafa; padding: 15px; border-radius: 4px; border: 1px solid #eee; display: flex; align-items: center; gap: 10px;">
+                            {{ field }}
+                        </div>
+                        {% else %}
+                        <div>{{ field }}</div>
+                        {% endif %}
+
+                        {% if field.errors %}
+                        <span class="text-danger" style="font-size: 12px; margin-top: 5px; display: block;">{{ field.errors }}</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+
+                    <div style="margin-top: 35px; text-align: center;">
+                        <input type="submit" value="Отправить отзыв" class="btn btn-primary" style="padding: 14px 40px; font-size: 13px; letter-spacing: 1px; width: 100%; border-radius: 0; font-weight: bold; text-transform: uppercase;" />
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+    <!-- Блок благодарности после отправки (остается аккуратным) -->
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div style="border: 1px solid #d4af37; padding: 40px 30px; text-align: center; background: #fdfbf7; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.02);">
+                <i class="fa-solid fa-circle-check" style="font-size: 44px; color: #27ae60; margin-bottom: 15px;"></i>
+                <h4 style="font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #1a1a1a;">Ваш отзыв успешно принят!</h4>
+                <p style="color: #666; font-size: 14px; margin-top: 10px; line-height: 1.6;">Благодарим за уделенное время. Анкета успешно сохранена в базе данных сервера.</p>
+            </div>
+
+            <table class="table" style="margin-top: 20px; border: 1px solid #eee; background: white;">
+                <thead style="background: #1a1a1a; color: white; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">
+                    <tr><th style="padding: 12px 15px;">Параметр</th><th style="padding: 12px 15px;">Ваш ответ</th></tr>
+                </thead>
+                <tbody style="font-size: 14px; color: #444;">
+                    <tr><td style="padding: 12px 15px;"><strong>Имя клиента</strong></td><td style="padding: 12px 15px;">{{ form_data.name }}</td></tr>
+                    <tr><td style="padding: 12px 15px;"><strong>Электронная почта</strong></td><td style="padding: 12px 15px;">{{ form_data.email }}</td></tr>
+                    <tr><td style="padding: 12px 15px;"><strong>Категория товара</strong></td><td style="padding: 12px 15px;">{{ form_data.category }}</td></tr>
+                    <tr><td style="padding: 12px 15px;"><strong>Оценка сервиса</strong></td><td style="padding: 12px 15px;">{{ form_data.score }} / 5</td></tr>
+                    <tr><td style="padding: 12px 15px;"><strong>Подписка на акции</strong></td><td style="padding: 12px 15px;">{{ form_data.subscribe }}</td></tr>
+                    <tr><td style="padding: 12px 15px;"><strong>Текст сообщения</strong></td><td style="padding: 12px 15px; word-break: break-word;">{{ form_data.message }}</td></tr>
+                </tbody>
+            </table>
+
+            <div class="text-center" style="margin-top: 30px;">
+                <a href="{% url 'home' %}" class="btn btn-default" style="padding: 12px 35px; text-transform: uppercase; font-size: 12px; font-weight: bold; letter-spacing: 1px;">На главную страницу</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {        
+        $('.custom-radio-group ul').css({
+            'list-style-type': 'none',
+            'padding-left': '0',
+            'margin': '0'
+        });
+        $('.custom-radio-group li').css({
+            'margin-bottom': '10px',
+            'display': 'flex',
+            'align-items': 'center',
+            'gap': '10px'
+        });
+        $('.custom-radio-group input[type="radio"]').css({
+            'margin': '0',
+            'cursor': 'pointer'
+        });
+        $('.custom-radio-group label').css({
+            'font-weight': 'normal',
+            'cursor': 'pointer',
+            'margin': '0',
+            'text-transform': 'none',
+            'font-size': '14px',
+            'letter-spacing': '0'
+        });
+
+    });
+</script>
+{% endblock %}
+{% endblock %}

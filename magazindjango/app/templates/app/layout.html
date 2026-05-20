@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Магазин одежды</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+    <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+    <link rel="preconnect" href="googleapis.com">
+    <link rel="preconnect" href="gstatic.com" crossorigin>
+    <link href="googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="cloudflare.com">
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid" style="max-width: 1500px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; width: 100%; height: 70px; padding: 0 30px;">
+
+            <!-- Логотип бренда -->
+            <a href="{% url 'home' %}" class="navbar-brand" style="font-family: 'Playfair Display', serif !important; font-weight: 900; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; color: #ffffff; text-decoration: none; margin: 0; padding: 0; line-height: 70px; height: 70px;">FashionShop</a>
+
+            <!-- Главное меню навигации  -->
+            <ul class="nav navbar-nav" style="display: flex; flex-direction: row; align-items: center; margin: 0; padding: 0; list-style: none; gap: 0;">
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О магазине</a></li>
+                <li><a href="{% url 'contact' %}">Контакты</a></li>
+                <li><a href="{% url 'pool' %}">Оставить отзыв</a></li>
+                <li><a href="{% url 'links' %}">Ресурсы</a></li>
+                <li><a href="{% url 'blog' %}">Блог</a></li>
+                <li><a href="{% url 'videopost' %}">Видео</a></li>
+                {% if user.is_superuser %}
+                <li><a href="{% url 'newpost' %}">Добавить статью</a></li>
+                {% endif %}
+            </ul>
+
+            <!-- Правый блок: Авторизация -->
+            <div style="display: flex; align-items: center; height: 70px;">
+                {% include "app/loginpartial.html" %}
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="container body-content">
+        {% block content %}{% endblock %}
+        <hr />
+        <footer>
+            <p>&copy; {{ year }} - Интернет-магазин одежды. Все права защищены.</p>
+        </footer>
+    </div>
+
+    <script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
+    <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
+    <script src="{% static 'app/scripts/respond.js' %}"></script>
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>

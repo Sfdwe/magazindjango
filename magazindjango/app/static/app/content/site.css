@@ -1,0 +1,332 @@
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+/* --- Индивидуальное оформление сайта FashionShop (Пункт 5) --- */
+
+/* 1. Меню сайта */
+.navbar-inverse {
+    background-color: #1a1a1a !important; /* Угольно-черный цвет навигации */
+    border-bottom: 2px solid #d4af37 !important; /* Золотистая дизайнерская полоса снизу */
+}
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #e5e5e5 !important; /* Светло-серый цвет ссылок меню */
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+
+        .navbar-inverse .navbar-nav > li > a:hover {
+            color: #d4af37 !important; /* Золотистый цвет при наведении на меню */
+        }
+
+/* 2. Заголовки */
+h1, h2, h3 {
+    color: #222222;
+    font-family: 'Playfair Display', 'Georgia', serif; /* Элегантный шрифт для модных журналов */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+h2 {
+    border-left: 4px solid #d4af37; /* Модный золотистый маркер слева от главных заголовков */
+    padding-left: 15px;
+    margin-top: 30px;
+}
+
+/* 3. Тексты */
+p {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #444444; /* Смягченный черный цвет для удобства чтения */
+    line-height: 1.7 !important;
+}
+
+.lead {
+    color: #666666 !important;
+    font-size: 18px;
+}
+
+/* 4. Таблицы */
+.table-bordered {
+    border: 1px solid #e1e1e1 !important;
+}
+
+    .table-bordered > tbody > tr > td {
+        padding: 12px 15px !important;
+        vertical-align: middle;
+    }
+
+    .table-bordered tr:nth-child(even) {
+        background-color: #f9f9f9; /* Чередование строк таблицы по цветам */
+    }
+
+/* 5. Гиперссылки и кнопки */
+.btn-primary {
+    background-color: #222222 !important; /* Черные стильные кнопки вместо синих */
+    border-color: #222222 !important;
+    border-radius: 0px !important; /* Строгие прямоугольные формы для фэшн-индустрии */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #d4af37 !important; /* Золотистая кнопка при наведении */
+        border-color: #d4af37 !important;
+    }
+
+.btn-default {
+    border-radius: 0px !important;
+    border: 1px solid #222222 !important;
+    color: #222222 !important;
+    background: transparent !important;
+    transition: all 0.3s ease;
+}
+
+    .btn-default:hover {
+        background-color: #222222 !important;
+        color: #ffffff !important;
+    }
+
+/* 6. Изображения */
+img {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Мягкая тень для картинок */
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+    img:hover {
+        transform: scale(1.02); /* Легкое интерактивное увеличение картинок при наведении */
+    }
+/* --- СТИЛИ ДЛЯ ИНТЕРНЕТ-МАГАЗИНА ОДЕЖДЫ FASHIONSHOP --- */
+
+/* Переключение всего сайта на качественный шрифт */
+body, p, a, button, input, label {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Дизайнерские карточки одежды */
+.product-card {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+    .product-card:hover {
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        transform: translateY(-5px);
+        border-color: #e0e0e0;
+    }
+
+/* Эффекты обертки изображений */
+.product-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.product-img {
+    width: 100%;
+    height: 350px !important; /* Фиксированная высота для каталога одежды */
+    object-fit: cover; /* Фотографии не искажаются, а аккуратно заполняют блок */
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.05); /* Плавное увеличение фото при наведении */
+}
+
+/* Лейблы (New / Sale) */
+.product-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #1a1a1a;
+    color: #ffffff;
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 4px 10px;
+    letter-spacing: 1px;
+}
+
+    .product-badge.sale {
+        background: #c0392b; /* Красный бейдж для скидок */
+    }
+
+/* Информационный блок карточки */
+.product-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.product-cat {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #999999;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.product-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #222222;
+    margin: 5px 0 10px 0;
+    height: 40px; /* Чтобы названия в две строки не ломали сетку */
+    overflow: hidden;
+}
+
+.product-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+}
+
+/* Стильная скрытая кнопка покупки */
+.btn-buy {
+    opacity: 0.9;
+    transform: translateY(0);
+    border-radius: 0px !important;
+}
+
+.product-card:hover .btn-buy {
+    opacity: 1;
+    background-color: #d4af37 !important;
+    border-color: #d4af37 !important;
+}
+
+   
+
+/* Главный контейнер навигации */
+.navbar-inverse {
+    background-color: #111111 !important; /* Глубокий матовый черный цвет */
+    border-bottom: 1px solid #222222 !important; /* Тонкая строгая рамка вместо грубой золотой полосы */
+    min-height: 70px !important; /* Увеличиваем высоту шапки для воздуха */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important; /* Мягкая тень под меню */
+    transition: all 0.3s ease;
+}
+
+    /* Центрирование контейнера внутри шапки */
+    .navbar-inverse .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 70px;
+    }
+
+    /* Стилизация логотипа бутика (Строка брендинга) */
+    .navbar-inverse .navbar-brand {
+        font-family: 'Playfair Display', 'Georgia', serif !important;
+        font-weight: 900 !important;
+        font-size: 22px !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+        color: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        line-height: 70px !important; /* Идеальное центрирование текста по высоте */
+        height: 70px !important;
+        transition: color 0.3s ease;
+    }
+
+        .navbar-inverse .navbar-brand:hover {
+            color: #d4af37 !important; /* Золотистый оттенок при наведении на название */
+        }
+
+    /* Ссылки главного навигационного меню */
+    .navbar-inverse .navbar-nav > li > a {
+        color: #aaaaaa !important; /* Элегантный приглушенный цвет текста */
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1.5px !important;
+        padding: 0 15px !important;
+        line-height: 70px !important; /* Выравниваем все пункты строго по центру высоты */
+        height: 70px !important;
+        transition: all 0.3s ease !important;
+        background: transparent !important;
+    }
+
+        /* Эффект интерактивного наведения для пунктов меню */
+        .navbar-inverse .navbar-nav > li > a:hover {
+            color: #ffffff !important; /* Белое свечение текста */
+        }
+
+    /* Активное состояние текущей страницы */
+    .navbar-inverse .navbar-nav > .active > a,
+    .navbar-inverse .navbar-nav > .active > a:hover,
+    .navbar-inverse .navbar-nav > .active > a:focus {
+        color: #d4af37 !important; /* Выделяем активную вкладку приглушенным золотом */
+        background: transparent !important;
+    }
+
+    /* Правый блок авторизации (Приветствие и Кнопка Выйти) */
+    .navbar-inverse .navbar-right {
+        margin-right: 0 !important;
+    }
+
+        .navbar-inverse .navbar-right li a {
+            font-size: 12px !important;
+            letter-spacing: 1px !important;
+        }
+
+/* Исправление отступа основного контента сайта, чтобы шапка его не перекрывала */
+body {
+    padding-top: 100px !important;
+    background-color: #ffffff;
+}
+
+/* Дополнительное сглаживание для мобильного бургер-меню */
+.navbar-toggle {
+    margin-top: 18px !important;
+    margin-bottom: 18px !important;
+    border-color: #333333 !important;
+}
+
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color: #ffffff !important;
+}

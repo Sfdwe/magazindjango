@@ -1,0 +1,161 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+<!-- 1. Интерактивный слайдер-карусель -->
+<div id="fashionCarousel" class="carousel slide" data-ride="carousel" data-interval="4000" style="margin-bottom: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+    <ol class="carousel-indicators">
+        <li data-target="#fashionCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#fashionCarousel" data-slide-to="1"></li>
+        <li data-target="#fashionCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{% static 'app/content/slide1.jpg' %}') center/cover no-repeat; height: 400px; border-radius: 4px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 0 20px;">
+                <h1 style="font-size: 42px; text-transform: uppercase; letter-spacing: 3px; font-weight: 800; color: white; border: none; padding: 0; margin-bottom: 15px;">Новая коллекция 2026</h1>
+                <p style="font-size: 16px; max-width: 600px; color: #e5e5e5; margin-bottom: 20px;">Премиальное качество и безупречный стиль в каждой детали гардероба.</p>
+                <a href="{% url 'blog' %}" class="btn btn-primary" style="background-color: white !important; color: #1a1a1a !important; padding: 10px 25px;">Смотреть новинки</a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{% static 'app/content/slide2.jpg' %}') center/cover no-repeat; height: 400px; border-radius: 4px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 0 20px;">
+                <h1 style="font-size: 42px; text-transform: uppercase; letter-spacing: 3px; font-weight: 800; color: white; border: none; padding: 0; margin-bottom: 15px;">Сезонная распродажа</h1>
+                <p style="font-size: 16px; max-width: 600px; color: #e5e5e5; margin-bottom: 20px;">Обновите свой базовый гардероб со скидками до 50% на прошлые коллекции.</p>
+                <a href="#" class="btn btn-primary" style="background-color: #c0392b !important; color: white !important; border-color: #c0392b !important; padding: 10px 25px;">В раздел акций</a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{% static 'app/content/slide3.jpg' %}') center/cover no-repeat; height: 400px; border-radius: 4px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 0 20px;">
+                <h1 style="font-size: 42px; text-transform: uppercase; letter-spacing: 3px; font-weight: 800; color: white; border: none; padding: 0; margin-bottom: 15px;">Быстрая доставка</h1>
+                <p style="font-size: 16px; max-width: 600px; color: #e5e5e5; margin-bottom: 20px;">Доставка по всей России курьером или в пункты выдачи с бесплатной примеркой.</p>
+                <a href="{% url 'contact' %}" class="btn btn-primary" style="background-color: white !important; color: #1a1a1a !important; padding: 10px 25px;">Условия доставки</a>
+            </div>
+        </div>
+    </div>
+
+    <a class="left carousel-control" href="#fashionCarousel" role="button" data-slide="prev" style="border-radius: 4px 0 0 4px; background: none;">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    </a>
+    <a class="right carousel-control" href="#fashionCarousel" role="button" data-slide="next" style="border-radius: 0 4px 4px 0; background: none;">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    </a>
+</div>
+
+<!-- 2. Блок Витрины Товаров -->
+<div class="container-fluid" style="padding: 0;">
+    <div class="section-header" style="text-align: center; margin-bottom: 40px;">
+        <h2 style="border: none; display: inline-block; padding: 0; font-size: 32px; text-transform: uppercase; letter-spacing: 2px;">Бестселлеры сезона</h2>
+        <div style="width: 50px; height: 2px; background: #d4af37; margin: 15px auto 0;"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 col-sm-6" style="margin-bottom: 30px;">
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="{% static 'app/content/p1.jpg' %}" alt="Пальто" class="img-responsive product-img" />
+                    <span class="product-badge">New</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Верхняя одежда</span>
+                    <h4 class="product-title">Шерстяное пальто оверсайз</h4>
+                    <div class="product-price">14 990 ₽</div>
+                    <button class="btn btn-primary btn-block btn-buy"><i class="fa-solid fa-bag-shopping"></i> В корзину</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6" style="margin-bottom: 30px;">
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="{% static 'app/content/p2.jpg' %}" alt="Худи" class="img-responsive product-img" />
+                    <span class="product-badge sale">Sale</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Трикотаж</span>
+                    <h4 class="product-title">Худи из плотного хлопка</h4>
+                    <div class="product-price"><span style="text-decoration: line-through; color: #999; font-size: 14px; margin-right: 10px;">5 990 ₽</span>4 190 ₽</div>
+                    <button class="btn btn-primary btn-block btn-buy"><i class="fa-solid fa-bag-shopping"></i> В корзину</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6" style="margin-bottom: 30px;">
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="{% static 'app/content/p3.jpg' %}" alt="Джинсы" class="img-responsive product-img" />
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Деним</span>
+                    <h4 class="product-title">Джинсы Straight в винтажном стиле</h4>
+                    <div class="product-price">6 490 ₽</div>
+                    <button class="btn btn-primary btn-block btn-buy"><i class="fa-solid fa-bag-shopping"></i> В корзину</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6" style="margin-bottom: 30px;">
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="{% static 'app/content/p4.jpg' %}" alt="Обувь" class="img-responsive product-img" />
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">Обувь</span>
+                    <h4 class="product-title">Минималистичные кроссовки</h4>
+                    <div class="product-price">8 990 ₽</div>
+                    <button class="btn btn-primary btn-block btn-buy"><i class="fa-solid fa-bag-shopping"></i> В корзину</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 3. Блок преимуществ бренда -->
+<div class="row" style="background-color: #fafafa; padding: 50px 20px; margin-top: 50px; border-top: 1px solid #eee; border-bottom: 1px solid #eee;">
+    <div class="container">
+        <div class="col-md-4 text-center" style="margin-bottom: 20px;">
+            <div style="padding: 20px; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fa-solid fa-gem" style="font-size: 32px; color: #d4af37; margin-bottom: 15px; display: inline-block;"></i>
+                <h4 style="text-transform: uppercase; font-size: 13px; letter-spacing: 2px; font-weight: bold; color: #1a1a1a;">Исключительное качество</h4>
+                <p style="font-size: 13px; color: #666; line-height: 1.6; margin-top: 10px;">Натуральные итальянские ткани, идеальные лекала и строгий контроль каждого шва.</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center" style="margin-bottom: 20px;">
+            <div style="padding: 20px; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fa-solid fa-truck-fast" style="font-size: 32px; color: #d4af37; margin-bottom: 15px; display: inline-block;"></i>
+                <h4 style="text-transform: uppercase; font-size: 13px; letter-spacing: 2px; font-weight: bold; color: #1a1a1a;">Примерка перед покупкой</h4>
+                <p style="font-size: 13px; color: #666; line-height: 1.6; margin-top: 10px;">Быстрая доставка СДЭК до двери. Оплачивайте картой строго то, что вам идеально подошло.</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center" style="margin-bottom: 20px;">
+            <div style="padding: 20px; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fa-solid fa-arrow-rotate-left" style="font-size: 32px; color: #d4af37; margin-bottom: 15px; display: inline-block;"></i>
+                <h4 style="text-transform: uppercase; font-size: 13px; letter-spacing: 2px; font-weight: bold; color: #1a1a1a;">Легкий возврат</h4>
+                <p style="font-size: 13px; color: #666; line-height: 1.6; margin-top: 10px;">Не подошел размер или фасон? Верните товар обратно в течение 14 дней без лишних документов.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 4. Интерактивный скрипт для корзины -->
+<script src="jquery.com"></script>
+<script>
+    $(document).ready(function () {
+        var count = 0;
+        $('.btn-buy').click(function (e) {
+            e.preventDefault();
+            count++;
+            $('#cart-counter').fadeOut(100, function () {
+                $(this).text(count).fadeIn(100);
+            });
+            var originalBtn = $(this);
+            originalBtn.html('<i class="fa-solid fa-check"></i> Добавлено!').css('background-color', '#27ae60').css('border-color', '#27ae60');
+            setTimeout(function () {
+                originalBtn.html('<i class="fa-solid fa-bag-shopping"></i> В корзину').css('background-color', '').css('border-color', '');
+            }, 1500);
+        });
+    });
+</script>
+{% endblock %}

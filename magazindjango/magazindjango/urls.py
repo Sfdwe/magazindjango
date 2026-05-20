@@ -1,0 +1,41 @@
+"""
+Definition of urls for magazindjango.
+"""
+
+from datetime import datetime
+from django.urls import path
+from django.contrib import admin
+from django.contrib.auth.views import LoginView, LogoutView
+from app import forms, views
+
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('contact/', views.contact, name='contact'),
+    path('about/', views.about, name='about'),
+    path('pool/', views.pool, name='pool'),
+    path('links/', views.links, name='links'),
+    path('blog/', views.blog, name='blog'),
+    path('blogpost/<int:parametr>/', views.blogpost, name='blogpost'),
+    path('newpost/', views.newpost, name='newpost'),
+    path('video/', views.videopost, name='videopost'),
+    path('registration/', views.registration, name='registration'),
+    path('admin/', admin.site.urls),
+    
+    path('login/',
+         LoginView.as_view(
+             template_name='app/login.html',
+             authentication_form=forms.BootstrapAuthenticationForm,
+             extra_context={
+                 'title': 'Вход',
+                 'year': datetime.now().year,
+             }
+         ),
+         name='login'),
+         
+    path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
+    path('admin/', admin.site.register if hasattr(admin.site, 'register') and not isinstance(admin.site.register, type) else admin.site.urls),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

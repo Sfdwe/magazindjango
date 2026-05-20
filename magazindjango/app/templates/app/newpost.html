@@ -1,0 +1,65 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="container" style="margin-top: 40px; margin-bottom: 60px; max-width: 700px;">
+    <!-- Заголовок страницы -->
+    <div class="text-center" style="margin-bottom: 40px;">
+        <h2 style="border: none; padding: 0; text-transform: uppercase; letter-spacing: 3px; font-size: 30px; font-weight: 800; color: #1a1a1a;">{{ title }}</h2>
+        <p class="lead" style="color: #777; font-size: 14px; letter-spacing: 1px; margin-top: 10px;">Панель редактора: публикация новых материалов и обзоров стиля</p>
+        <div style="width: 60px; height: 2px; background: #d4af37; margin: 15px auto 0;"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div style="background: #ffffff; border: 1px solid #eaeaea; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); border-radius: 4px;">
+
+                <form method="POST" enctype="multipart/form-data" class="form-horizontal">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                    <div class="form-group" style="margin-bottom: 25px; padding: 0 15px;">
+                        <label style="font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; color: #222; margin-bottom: 8px; display: block;">
+                            {{ field.label }}
+                        </label>
+
+                        {% if field.name == 'image' %}
+                        <div style="background: #fafafa; padding: 15px; border-radius: 4px; border: 1px solid #eee;">
+                            {{ field }}
+                            <small class="text-muted" style="display: block; margin-top: 5px; font-size: 11px;">Рекомендуется горизонтальное изображение высокого качества.</small>
+                        </div>
+                        {% else %}
+                        <div>{{ field }}</div>
+                        {% endif %}
+
+                        {% if field.errors %}
+                        <span class="text-danger" style="font-size: 12px; margin-top: 5px; display: block;">{{ field.errors }}</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+
+                    <div style="margin-top: 35px; text-align: center;">
+                        <button type="submit" class="btn btn-primary" style="padding: 14px 40px; font-size: 13px; letter-spacing: 1px; width: 100%; border-radius: 0; font-weight: bold; text-transform: uppercase;">
+                            Опубликовать в блог
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>$(document).ready(function () {
+        // Эффект интерактивности для кнопки
+        var submitBtn = $('button[type="submit"]');
+        submitBtn.mouseover(function () { $(this).css('background-color', '#d4af37').css('border-color', '#d4af37'); });
+        submitBtn.mouseout(function () { $(this).css('background-color', '#1a1a1a').css('border-color', '#1a1a1a'); });
+
+        // Подсветка полей формы при фокусе
+        var inputFields = $('.form-control');
+        inputFields.focus(function () { $(this).css('background-color', '#fffdf6').css('border-color', '#d4af37').css('box-shadow', 'none'); });
+        inputFields.blur(function () { $(this).css('background-color', '#ffffff').css('border-color', '#ccc'); });
+    });</script>
+{% endblock %}
+{% endblock %}

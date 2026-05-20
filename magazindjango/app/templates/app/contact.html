@@ -1,0 +1,43 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="container" style="margin-top: 30px;">
+    <div class="text-center" style="margin-bottom: 50px;">
+        <h2 style="border: none; padding: 0; text-transform: uppercase; letter-spacing: 3px; font-size: 32px; font-weight: 800;">{{ title }}</h2>
+        <div style="width: 60px; height: 2px; background: #d4af37; margin: 15px auto 0;"></div>
+    </div>
+
+    <div class="row">
+        <!-- Карточка Адреса -->
+        <div class="col-md-4 text-center" style="margin-bottom: 30px;">
+            <div style="background: #ffffff; border: 1px solid #eee; padding: 40px 20px; min-height: 220px; transition: all 0.3s;" onmouseover="this.style.borderColor='#d4af37'" onmouseout="this.style.borderColor='#eee'">
+                <i class="fa-solid fa-location-dot" style="font-size: 30px; color: #1a1a1a; margin-bottom: 20px;"></i>
+                <h4 style="font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">Шоурум</h4>
+                <p style="color: #666; margin-top: 10px; font-size: 14px;">г. Псков, ул. Ленина, д. 15<br />Ежедневно: с 10:00 до 21:00</p>
+            </div>
+        </div>
+
+        <!-- Карточка Телефона -->
+        <div class="col-md-4 text-center" style="margin-bottom: 30px;">
+            <div style="background: #ffffff; border: 1px solid #eee; padding: 40px 20px; min-height: 220px; transition: all 0.3s;" onmouseover="this.style.borderColor='#d4af37'" onmouseout="this.style.borderColor='#eee'">
+                <i class="fa-solid fa-phone" style="font-size: 30px; color: #1a1a1a; margin-bottom: 20px;"></i>
+                <h4 style="font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">Телефонная линия</h4>
+                <p style="color: #666; margin-top: 10px; font-size: 16px; font-weight: bold; color: #1a1a1a;">8 (800) 555-35-35</p>
+                <p style="color: #999; font-size: 12px;">Звонок по России бесплатный</p>
+            </div>
+        </div>
+
+        <!-- Карточка Почты -->
+        <div class="col-md-4 text-center" style="margin-bottom: 30px;">
+            <div style="background: #ffffff; border: 1px solid #eee; padding: 40px 20px; min-height: 220px; transition: all 0.3s;" onmouseover="this.style.borderColor='#d4af37'" onmouseout="this.style.borderColor='#eee'">
+                <i class="fa-solid fa-envelope" style="font-size: 30px; color: #1a1a1a; margin-bottom: 20px;"></i>
+                <h4 style="font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">Электронная почта</h4>
+                <p style="color: #666; margin-top: 10px; font-size: 14px;">
+                    Клиентская служба: <a href="mailto:support@fashionshop.ru" style="color: #d4af37;">support@fashionshop.ru</a><br />
+                    Сотрудничество: <a href="mailto:marketing@fashionshop.ru" style="color: #d4af37;">marketing@fashionshop.ru</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
