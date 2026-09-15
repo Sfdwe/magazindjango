@@ -2,59 +2,46 @@
 
 {% block content %}
 <div class="container" style="margin-top: 30px;">
-    <!-- Заголовок раздела -->
-    <div class="text-center" style="margin-bottom: 50px;">
-        <h2 style="border: none; padding: 0; text-transform: uppercase; letter-spacing: 3px; font-size: 32px; font-weight: 800;">{{ title }}</h2>
-        <p class="lead" style="color: #777; font-size: 14px; letter-spacing: 1px; margin-top: 10px;">Свежие тренды, обзоры коллекций и советы по стилю от FashionShop</p>
-        <div style="width: 60px; height: 2px; background: #d4af37; margin: 15px auto 0;"></div>
+    <div class="text-center" style="margin-bottom: 40px;">
+        <h2>{{ title }}</h2>
+        <p class="text-muted">Полезные статьи, тренды и советы от нашего магазина</p>
     </div>
 
-    <!-- Лента статей в виде плитки -->
-    <div class="row">
+    <div class="row" style="display: flex; flex-wrap: wrap;">
         {% for post in posts %}
-        <div class="col-md-4 col-sm-6" style="margin-bottom: 40px;">
-            <div style="background: #ffffff; border: 1px solid #eee; transition: all 0.3s; height: 100%; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.02);"
-                 onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.08)'; this.style.borderColor='#e0e0e0';"
-                 onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.02)'; this.style.borderColor='#eee';">
+        <div class="col-md-4 col-sm-6" style="margin-bottom: 30px;">
+            <div class="card" style="background: #ffffff; border: 1px solid #eee; border-radius: 8px; padding: 15px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
 
-                <!-- Если у статьи есть загруженная картинка -->
-                {% if post.image %}
-                <div style="height: 220px; overflow: hidden; background: #f9f9f9;">
-                    <img src="{{ post.image.url }}" alt="Превью статьи" style="width: 100%; height: 100%; object-fit: cover;" />
+                <!-- Изображение статьи -->
+                <div style="height: 200px; overflow: hidden; border-radius: 4px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width: 100%; max-height: 100%; object-fit: cover;" />
+                    {% else %}
+                    <i class="fa fa-regular fa-image" style="font-size: 48px; color: #ccc;"></i>
+                    {% endif %}
                 </div>
-                {% else %}
-                <!-- Заглушка, если картинки нет (стильный серый блок с иконкой) -->
-                <div style="height: 220px; background: #f5f5f5; display: flex; justify-content: center; align-items: center; color: #ccc;">
-                    <i class="fa-regular fa-image" style="font-size: 40px;"></i>
-                </div>
-                {% endif %}
 
-                <!-- Контент карточки -->
-                <div style="padding: 25px; flex-grow: 1; display: flex; flex-direction: column;">
-                    <span style="font-size: 11px; text-transform: uppercase; color: #d4af37; letter-spacing: 1px; font-weight: bold; margin-bottom: 8px; display: block;">
-                        <i class="fa-solid fa-calendar-days" style="margin-right: 5px;"></i> {{ post.posted|date:"d.m.Y" }}
-                    </span>
-
-                    <h3 style="font-size: 18px; font-weight: 700; color: #1a1a1a; margin: 0 0 12px 0; line-height: 1.4; height: 50px; overflow: hidden;">
-                        {{ post.title }}
-                    </h3>
-
-                    <p style="color: #666; font-size: 14px; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; height: 68px; overflow: hidden;">
+                <!-- Текст -->
+                <div>
+                    <h4 style="font-weight: bold; margin-bottom: 5px; color: #333;">{{ post.title }}</h4>
+                    <p class="text-muted" style="font-size: 12px;">Опубликовано: {{ post.posted|date:"d.m.Y" }}</p>
+                    <p style="color: #666; margin-top: 10px; font-size: 14px; line-height: 1.4;">
                         {{ post.short_description }}
                     </p>
-
-                    <div style="margin-top: auto;">
-                        <a href="{% url 'blogpost' parametr=post.id %}" class="btn btn-default btn-block" style="text-transform: uppercase; font-size: 12px; font-weight: bold; letter-spacing: 1px; padding: 10px 0;">
-                            Читать статью &raquo;
-                        </a>
-                    </div>
                 </div>
+
+                <!-- Кнопка -->
+                <div style="margin-top: 15px;">
+                    <a href="{% url 'blogpost' parametr=post.id %}" class="btn btn-default btn-block" style="font-weight: bold;">
+                        Читать статью
+                    </a>
+                </div>
+
             </div>
         </div>
         {% empty %}
         <div class="col-md-12 text-center" style="padding: 50px 0;">
-            <i class="fa-regular fa-folder-open" style="font-size: 48px; color: #ccc; margin-bottom: 15px;"></i>
-            <p class="lead" style="color: #999;">В блоге пока нет опубликованных статей.</p>
+            <p class="lead" style="color: #999;">Статей пока нет.</p>
         </div>
         {% endfor %}
     </div>

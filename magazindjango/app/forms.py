@@ -71,3 +71,27 @@ class CommentForm(forms.ModelForm):
             'author': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ваше имя'}),
             'text': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Напишите комментарий...'}),
         }
+from .models import Product
+
+class NewProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('category', 'title', 'short_description', 'full_description', 'price', 'image_url')
+        widgets = {
+            'category': forms.Select(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Название товара'}),
+            'short_description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Краткое описание'}),
+            'full_description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Полное описание'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Цена'}),
+            'image_url': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'Ссылка на картинку'}),
+        }
+from .models import Category
+
+class NewCategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ('title', 'description')
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Название категории'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Описание категории'}),
+        }

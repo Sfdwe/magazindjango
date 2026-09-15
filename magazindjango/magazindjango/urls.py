@@ -19,11 +19,15 @@ urlpatterns = [
     path('pool/', views.pool, name='pool'),
     path('links/', views.links, name='links'),
     path('blog/', views.blog, name='blog'),
+    path('newcategory/', views.newcategory, name='newcategory'),
     path('blogpost/<int:parametr>/', views.blogpost, name='blogpost'),
     path('newpost/', views.newpost, name='newpost'),
     path('video/', views.videopost, name='videopost'),
     path('registration/', views.registration, name='registration'),
     path('admin/', admin.site.urls),
+    path('catalog/', views.catalog, name='catalog'),
+    path('product/<int:parametr>/', views.product_detail, name='product_detail'),
+
     
     path('login/',
          LoginView.as_view(

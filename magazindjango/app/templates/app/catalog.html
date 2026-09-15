@@ -1,0 +1,66 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="container" style="margin-top: 30px;">
+    <div class="text-center" style="margin-bottom: 40px;">
+        <h2>{{ title }}</h2>
+        <p class="text-muted">Выберите категорию для фильтрации товаров</p>
+    </div>
+
+    <!-- КНОПКИ КАТЕГОРИЙ -->
+    <div class="text-center" style="margin-bottom: 40px;">
+        <a href="{% url 'catalog' %}" class="btn {% if not current_category %}btn-primary{% else %}btn-default{% endif %}" style="margin: 5px;">
+            Все товары
+        </a>
+        {% for category in categories %}
+        <a href="{% url 'catalog' %}?category={{ category.id }}" class="btn {% if current_category.id == category.id %}btn-primary{% else %}btn-default{% endif %}" style="margin: 5px;">
+            {{ category.title }}
+        </a>
+        {% endfor %}
+    </div>
+
+    <!-- СПИСОК ТОВАРОВ -->
+    <div class="row" style="display: flex; flex-wrap: wrap;">
+        {% for product in products %}
+        <div class="col-md-4 col-sm-6" style="margin-bottom: 30px;">
+            <div class="card" style="background: #ffffff; border: 1px solid #eee; border-radius: 8px; padding: 15px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s;" onmouseover="this.style.transform='translateY(-5px)';" onmouseout="this.style.transform='translateY(0)';">
+
+                <!-- Картинка товара -->
+                <div style="height: 200px; overflow: hidden; border-radius: 4px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                    {% if product.image_url %}
+                    <img src="{{ product.image_url }}" alt="{{ product.title }}" style="max-width: 100%; max-height: 100%; object-fit: cover;" />
+                    {% else %}
+                    <i class="fa fa-regular fa-image" style="font-size: 48px; color: #ccc;"></i>
+                    {% endif %}
+                </div>
+
+                <!-- Название и краткое описание -->
+                <div>
+                    <h4 style="font-weight: bold; margin-bottom: 5px; color: #333;">{{ product.title }}</h4>
+                    <span class="label label-info" style="font-size: 11px;">{{ product.category.title }}</span>
+                    <p style="color: #666; margin-top: 10px; font-size: 14px; line-height: 1.4; height: 40px; overflow: hidden;">
+                        {{ product.short_description }}
+                    </p>
+                </div>
+
+                <!-- Цена и ссылка на детальный просмотр -->
+                <div style="margin-top: 15px;">
+                    <div style="font-size: 20px; font-weight: 700; color: #222; margin-bottom: 10px; font-family: 'Playfair Display', serif;">
+                        {{ product.price|floatformat:0 }} ₽
+                    </div>
+                    <a href="{% url 'product_detail' parametr=product.id %}" class="btn btn-default btn-block" style="text-transform: uppercase; font-size: 12px; font-weight: bold;">
+                        Посмотреть товар
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-md-12 text-center" style="padding: 50px 0;">
+            <i class="fa fa-regular fa-folder-open" style="font-size: 48px; color: #ccc; margin-bottom: 15px;"></i>
+            <p class="lead" style="color: #999;">В этой категории пока нет товаров.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

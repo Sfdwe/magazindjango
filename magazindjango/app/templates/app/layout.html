@@ -16,27 +16,31 @@
 
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid" style="max-width: 1500px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; width: 100%; height: 70px; padding: 0 30px;">
+        <div class="container-fluid" style="width: 100%; padding: 0 30px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 70px;">
 
             <!-- Логотип бренда -->
             <a href="{% url 'home' %}" class="navbar-brand" style="font-family: 'Playfair Display', serif !important; font-weight: 900; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; color: #ffffff; text-decoration: none; margin: 0; padding: 0; line-height: 70px; height: 70px;">FashionShop</a>
 
             <!-- Главное меню навигации  -->
-            <ul class="nav navbar-nav" style="display: flex; flex-direction: row; align-items: center; margin: 0; padding: 0; list-style: none; gap: 0;">
-                <li><a href="{% url 'home' %}">Главная</a></li>
-                <li><a href="{% url 'about' %}">О магазине</a></li>
-                <li><a href="{% url 'contact' %}">Контакты</a></li>
-                <li><a href="{% url 'pool' %}">Оставить отзыв</a></li>
-                <li><a href="{% url 'links' %}">Ресурсы</a></li>
-                <li><a href="{% url 'blog' %}">Блог</a></li>
-                <li><a href="{% url 'videopost' %}">Видео</a></li>
+            <ul class="nav navbar-nav" style="display: flex; flex-direction: row; align-items: center; margin: 0; padding: 0; list-style: none; gap: 8px;">
+                <li style="white-space: nowrap;"><a href="{% url 'home' %}" style="padding: 10px 4px; font-size: 13px;">Главная</a></li>
+                <li style="white-space: nowrap;"><a href="{% url 'about' %}" style="padding: 10px 4px; font-size: 13px;">О нас</a></li>
+                <li style="white-space: nowrap;"><a href="{% url 'contact' %}" style="padding: 10px 4px; font-size: 13px;">Контакты</a></li>
+                <li style="white-space: nowrap;"><a href="{% url 'catalog' %}" style="padding: 10px 4px; font-size: 13px; font-weight: bold; color: #007bff;">Каталог</a></li>
+                <li style="white-space: nowrap;"><a href="{% url 'pool' %}" style="padding: 10px 4px; font-size: 13px;">Отзывы</a></li>
+                <li style="white-space: nowrap;"><a href="{% url 'links' %}" style="padding: 10px 4px; font-size: 13px;">Ресурсы</a></li>
+                <li style="white-space: nowrap;"><a href="{% url 'blog' %}" style="padding: 10px 4px; font-size: 13px;">Блог</a></li>
+                <li style="white-space: nowrap;"><a href="{% url 'videopost' %}" style="padding: 10px 4px; font-size: 13px;">Видео</a></li>
                 {% if user.is_superuser %}
-                <li><a href="{% url 'newpost' %}">Добавить статью</a></li>
+                <li style="white-space: nowrap;"><a href="{% url 'newcategory' %}" style="padding: 10px 6px; font-size: 13px; border: 1px dashed #fff; border-radius: 4px; margin-left: 5px;">+ Категория</a></li>
+                <li style="white-space: nowrap;"><a href="{% url 'newpost' %}" style="padding: 10px 6px; font-size: 13px; border: 1px dashed #fff; border-radius: 4px;">+ Товар</a></li>
                 {% endif %}
             </ul>
 
+
+
             <!-- Правый блок: Авторизация -->
-            <div style="display: flex; align-items: center; height: 70px;">
+            <div style="display: flex; align-items: center; height: 70px; white-space: nowrap; margin-left: 20px;">
                 {% include "app/loginpartial.html" %}
             </div>
 

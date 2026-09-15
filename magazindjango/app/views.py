@@ -2,11 +2,12 @@
 Definition of views.
 """
 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm
-from .forms import ReviewForm, NewPostForm, CommentForm
-from .models import Blog, Comment
+from .models import Blog, Comment, Category, Product
+from django.shortcuts import render, get_object_or_404, redirect
 from datetime import datetime
+from .forms import ReviewForm, NewPostForm, CommentForm, NewProductForm, NewCategoryForm
+
+
 
 
 def home(request):
@@ -134,50 +135,115 @@ def registration(request):
 from .models import Blog
 from django.http import HttpRequest
 
+# ================= КОД ДЛЯ БЛОГА (ВОЗВРАЩАЕМ КАК БЫЛО) =================
+
 def blog(request):
-    """Отображает страницу со списком всех статей (ленту)."""
+    """Отображает страницу новостей/блога."""
     assert isinstance(request, HttpRequest)
-    posts = Blog.objects.all() # Выборка всех статей
+    posts = Blog.objects.all()  # Возвращаем выборку старых статей блога
     return render(
         request,
         'app/blog.html',
         {
-            'title': 'Блог о моде',
+            'title': 'Блог',
             'posts': posts,
             'year': datetime.now().year,
         }
     )
 
 def blogpost(request, parametr):
-    """Отображает страницу конкретной статьи по её ID."""
+    """Отображает детальную страницу статьи блога (старый вариант)."""
     assert isinstance(request, HttpRequest)
-    post_1 = Blog.objects.get(id=parametr) # Выборка статьи по параметру ID
+    post_1 = get_object_or_404(Blog, id=parametr)
+    comments = Comment.objects.filter(post=post_1)  # Комментарии к статье блога
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment_f = form.save(commit=False)
+            comment_f.post = post_1
+            comment_f.save()
+            return redirect('blogpost', parametr=post_1.id)
+    else:
+        form = CommentForm()
+
     return render(
         request,
         'app/blogpost.html',
         {
             'post_1': post_1,
+            'comments': comments,
+            'form': form,
+            'year': datetime.now().year,
+        }
+    )
+
+
+# ================= НОВЫЙ КОД ДЛЯ КАТАЛОГА ПО ТЗ =================
+
+def catalog(request):
+    """Отображает главную страницу каталога с категориями (Пункт 2 и 3 ТЗ)."""
+    assert isinstance(request, HttpRequest)
+    categories = Category.objects.all()
+    category_id = request.GET.get('category')
+    
+    if category_id:
+        current_category = get_object_or_404(Category, id=category_id)
+        products = Product.objects.filter(category=current_category)
+    else:
+        current_category = None
+        products = Product.objects.all()
+
+    return render(
+        request,
+        'app/catalog.html',  # Сделаем для каталога отдельный HTML-файл!
+        {
+            'title': 'Каталог товаров',
+            'categories': categories,
+            'current_category': current_category,
+            'products': products,
+            'year': datetime.now().year,
+        }
+    )
+
+def product_detail(request, parametr):
+    """Отображает карточку конкретного товара (Пункт 4 ТЗ)."""
+    assert isinstance(request, HttpRequest)
+    product = get_object_or_404(Product, id=parametr)
+    
+    # Чтобы не путать с комментариями блога, отзывы к товарам можно выводить так:
+    # (Для простоты пока оставим форму CommentForm, но привяжем к product в будущем)
+    return render(
+        request,
+        'app/product_detail.html',  # Отдельный HTML для карточки товара!
+        {
+            'product': product,
             'year': datetime.now().year,
         }
     )
 def newpost(request):
-    """Добавление статьи администратором."""
-    if not request.user.is_superuser:
+    """Добавление товаров администратором с сайта (Пункт 5 ТЗ)."""
+    assert isinstance(request, HttpRequest)
+    if not request.user.is_superuser:  # Проверка прав администратора
         return redirect('home')
+    
     if request.method == "POST":
-        form = NewPostForm(request.POST, request.FILES)
+        form = NewProductForm(request.POST)
         if form.is_valid():
-            Blog.objects.create(
-                title=form.cleaned_data['title'],
-                short_description=form.cleaned_data['short_description'],
-                content=form.cleaned_data['content'],
-                image=form.cleaned_data['image']
-            )
-            return redirect('blog')
+            form.save()  # Сохраняем товар в базу данных
+            return redirect('catalog')  # Перенаправляем на страницу каталога
     else:
-        form = NewPostForm()
-    return render(request, 'app/newpost.html', {'title': 'Добавить статью', 'form': form, 'year': datetime.now().year})
-
+        form = NewProductForm()
+        
+    return render(
+        request,
+        'app/newpost.html',
+        {
+            'title': 'Добавить товар в каталог',
+            'form': form,
+            'year': datetime.now().year,
+        }
+    )
 def videopost(request):
     """Отображение страницы с видео."""
     return render(request, 'app/videopost.html', {'title': 'Видео-презентации', 'year': datetime.now().year})
@@ -204,6 +270,29 @@ def blogpost(request, parametr):
         {
             'post_1': post_1,
             'comments': comments,
+            'form': form,
+            'year': datetime.now().year,
+        }
+    )
+def newcategory(request):
+    """Добавление новых категорий администратором с сайта (Пункт 5 ТЗ)."""
+    assert isinstance(request, HttpRequest)
+    if not request.user.is_superuser:
+        return redirect('home')
+    
+    if request.method == "POST":
+        form = NewCategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('catalog') # Перенаправляем в каталог после добавления
+    else:
+        form = NewCategoryForm()
+        
+    return render(
+        request,
+        'app/newcategory.html',
+        {
+            'title': 'Добавить категорию в каталог',
             'form': form,
             'year': datetime.now().year,
         }
